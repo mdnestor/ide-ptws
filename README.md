@@ -1,4 +1,4 @@
-Source code for the paper "Periodic Traveling Waves in an Integro-Difference Equation With Non-Monotonic Growth and Strong Allee Effect" by [M. Nestor](https://mdnestor.github.io/) and [B. Li](http://www.math.louisville.edu/~bli/).
+Source code for the paper "Periodic Traveling Waves in an Integro-Difference Equation With Non-Monotonic Growth and Strong Allee Effect" by [Michael Nestor](mailto:mdnest01@gmail.com) and Bingtuan Li.
 
 # Installation
 
