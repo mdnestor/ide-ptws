@@ -3,16 +3,16 @@ from scipy import ndimage
 import matplotlib.pyplot as plt
 
 class IDE():
-    def __init__(self, growth_fn, kernel_fn, initial_condition):
+    def __init__(self, growth_fn, kernel_fn):
         self.g  = growth_fn
         self.k  = kernel_fn
-        self.u  = initial_condition
 
 class IDESimulation():
-    def __init__(self, ide, num_iters, domain_size, step_size, boundary_condition = 'nearest'):
+    def __init__(self, ide, initial_condition, num_iters, domain_size, step_size, boundary_condition = 'nearest'):
         n = 1 + int(1 + domain_size/step_size)
 
         self.ide = ide
+        self.initial_condition = initial_condition
         self.domain = np.linspace(-domain_size/2, domain_size/2, n)
         self.boundary_condition = boundary_condition
 
@@ -25,7 +25,7 @@ class IDESimulation():
 
         (g, k) = (self.ide.g, self.ide.k)
 
-        U[0] = self.ide.u(x)
+        U[0] = self.initiail_condition(x)
         for i in range(num_iters):
             kx = k(x)
             U[i + 1] = ndimage.convolve(g(U[i]), kx, mode =
