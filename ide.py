@@ -1,5 +1,6 @@
 import numpy as np
 from scipy import ndimage
+import matplotlib.pyplot as plt
 
 class IDE():
     def __init__(self, growth_fn, kernel_fn, initial_condition):
