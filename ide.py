@@ -25,7 +25,7 @@ class IDESimulation():
 
         (g, k) = (self.ide.g, self.ide.k)
 
-        U[0] = self.initiail_condition(x)
+        U[0] = self.initial_condition(x)
         for i in range(num_iters):
             kx = k(x)
             U[i + 1] = ndimage.convolve(g(U[i]), kx, mode =
