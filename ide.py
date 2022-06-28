@@ -1,85 +1,34 @@
 import numpy as np
-from scipy import ndimage
-import matplotlib.pyplot as plt
+from scipy.ndimage import convolve
 
-class IDE():
-    def __init__(self, growth_fn, kernel_fn):
-        self.g  = growth_fn
-        self.k  = kernel_fn
-
-class IDESimulation():
-    def __init__(self, ide, initial_condition, num_iters, domain_size, step_size, boundary_condition = 'nearest'):
-        n = 1 + int(1 + domain_size/step_size)
-
-        self.ide = ide
-        self.initial_condition = initial_condition
-        self.domain = np.linspace(-domain_size/2, domain_size/2, n)
-        self.boundary_condition = boundary_condition
-
-        self.run(num_iters)
-        self.plot()
-
-    def run(self, num_iters, plot=True):
-        x = self.domain
-        U = np.zeros((num_iters + 1, x.shape[0]))
-
-        (g, k) = (self.ide.g, self.ide.k)
-
-        U[0] = self.initial_condition(x)
-        for i in range(num_iters):
-            kx = k(x)
-            U[i + 1] = ndimage.convolve(g(U[i]), kx, mode =
-            self.boundary_condition) / np.sum(kx)
-        self.results = U[:,::-1]
-
-    def plot(self):
-        self.plot_heatmap()
-        self.plot_diffmap()
-
-    def plot_heatmap(self):
-        x = self.domain
-        y = np.arange(self.results.shape[0])
-
-        X, Y = np.meshgrid(x, y)
-        Z = self.results
-
-        fig, ax = plt.subplots()
-
-        c = ax.pcolormesh(X, Y, Z,
-                          cmap='coolwarm',
-                          vmin=np.min(Z),
-                          vmax=np.max(Z))
-
-        ax.axis([np.min(X), np.max(X), np.min(Y), np.max(Y)])
-
-        fig.colorbar(c, ax=ax)
-
-        ax.set_xlabel('$x$ (position)')
-        ax.set_ylabel('$n$ (time step)')
-
-        plt.show()
-
-    def plot_diffmap(self):
-        x = self.domain
-        y = np.arange(self.results.shape[0])
-
-        X, Y = np.meshgrid(x, y)
-        Z = self.results
-        Z = np.gradient(Z, axis=0)
-        Z /= np.sign(Z)
-
-        fig, ax = plt.subplots()
-
-        c = ax.pcolormesh(X, Y, Z,
-                          cmap='coolwarm',
-                          vmin=np.min(Z),
-                          vmax=np.max(Z))
-
-        ax.axis([np.min(X), np.max(X), np.min(Y), np.max(Y)])
-
-        fig.colorbar(c, ax=ax)
-
-        ax.set_xlabel('$x$ (position)')
-        ax.set_ylabel('$n$ (time step)')
-        plt.gca().invert_yaxis()
-        plt.show()
+def ide_simulate(growth_fn, kernel_fn, initial_cd, n_iters,
+                 xmin, xmax, step_size,
+                 boundary_mode='constant', cval=0.0):
+  """
+  Main IDE simulation function.
+  :param function growth_fn: Growth function, takes density and position (floats) and returns float.
+  :param function kernel_fn: Kernel function, takes position (float), returns float.
+  :param function initial_cd: Initial condition, takes position (float), returns float.
+  :param int n_iters: Number of simulation iterations.
+  :param float xmin: Left domain bound.
+  :param float xmax: Right domain bound.
+  :param float step_size: Domain step size.
+  :param str boundary_mode: Boundary condition, passed to scipy.ndimage.convolve.
+  :param float cval: Constant value to use outside of domain. Only used if boundary_mode='constant'.
+  """
+  growth_fn = np.vectorize(growth_fn)
+  kernel_fn = np.vectorize(kernel_fn)
+  initial_cd = np.vectorize(initial_cd)
+  
+  domain = np.linspace(xmin, xmax, num=1+int((xmax-xmin)/dx), endpoint=True)
+  results = [initial_cd(domain)]
+  
+  k = kernel_fn(domain)
+  
+  for i in range(n_iters):
+    u = results[i]
+    gu = growth_fn(u, domain)
+    u_next = convolve(k, gu, mode=boundary_mode, cval=cval) / np.sum(k)
+    results.append(u_next)
+  
+  return results
