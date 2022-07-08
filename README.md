@@ -4,12 +4,21 @@ Source code for the paper "Periodic Traveling Waves in an Integro-Difference Equ
 
 In terminal:
 ```sh
-git clone https://github.com/mdnestor/idesim.git
+git clone https://github.com/mdnestor/ide-ptws.git
 cd idesim
 ```
 
-The module requires numpy and matplotlib. The primary class can be imported as follows:
-
+The primary class can then be imported as follows:
 ```python
-from idesim import IDESim
+from ide import ide_simulate
 ```
+
+# Usage examples
+
+- [ide-example1.ipynb](https://colab.research.google.com/github/mdnestor/ide-ptws/blob/master/ide-example1.ipynb) shows how to simulate an IDE with (normalized) Ricker growth map and Laplace dispersal kernel.
+
+![Example figure 1](./papers/figures/ex1fig1.png)
+
+![Example figure 2](./papers/figures/ex1fig2.png)
+
+
