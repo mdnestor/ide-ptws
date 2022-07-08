@@ -31,4 +31,4 @@ def ide_simulate(growth_fn, kernel_fn, initial_cd, n_iters,
     u_next = convolve(k, gu, mode=boundary_mode, cval=cval) / np.sum(k)
     results.append(u_next)
   
-  return results
+  return {'domain': domain, 'results': results}
