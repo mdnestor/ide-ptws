@@ -17,8 +17,8 @@ from ide import ide_simulate
 
 - [ide-example1.ipynb](https://colab.research.google.com/github/mdnestor/ide-ptws/blob/master/ide-example1.ipynb) shows how to simulate an IDE with (normalized) Ricker growth map and Laplace dispersal kernel.
 
-![Example figure 1](./papers/figures/ex1fig1.png)
+![Example figure 1](/paper/figures/ex1fig1.png)
 
-![Example figure 2](./papers/figures/ex1fig2.png)
+![Example figure 2](/paper/figures/ex1fig2.png)
 
 
