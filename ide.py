@@ -20,7 +20,7 @@ def ide_simulate(growth_fn, kernel_fn, initial_cd, n_iters,
   kernel_fn = np.vectorize(kernel_fn)
   initial_cd = np.vectorize(initial_cd)
   
-  domain = np.linspace(xmin, xmax, num=1+int((xmax-xmin)/dx), endpoint=True)
+  domain = np.linspace(xmin, xmax, num=1+int((xmax-xmin)/step_size), endpoint=True)
   results = [initial_cd(domain)]
   
   k = kernel_fn(domain)
