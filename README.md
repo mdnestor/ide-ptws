@@ -5,7 +5,7 @@ Source code for the paper "Periodic Traveling Waves in an Integro-Difference Equ
 In terminal:
 ```sh
 git clone https://github.com/mdnestor/ide-ptws.git
-cd idesim
+cd ide-ptws
 ```
 
 The primary class can then be imported as follows:
