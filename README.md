@@ -11,6 +11,11 @@ $$ u_{t+1}(x) = \int_{-\infty}^{\infty} k(x-y) f(u_t(y)) dy $$
 where each $u_t:\mathbb{R} \to \mathbb{R}$, $k$ is a convolution kernel, and $f$ is some function.
 
 [1]: Lutscher (2019).  Integrodifference Equations in Spatial Ecology. DOI: [10.1007/978-3-030-29294-2](https://doi.org/10.1007/978-3-030-29294-2)
+
+## Requirements
+
+Python==3.9.16. See [requirements.txt](requirements.txt).
+
 ## Usage
 
 The main solver is `simulate_integrodifference` in [ide.py](ide.py). it takes 5 inputs:
