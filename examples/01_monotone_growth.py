@@ -22,7 +22,7 @@ for i in range(soln.shape[0]):
 plt.show()
 plt.savefig("example_01a.png")
 
-plt.imshow(soln, aspect="auto", extent=[x[0], x[-1], 0, soln.shape[0]])
+plt.imshow(soln, aspect="auto", extent=[x[0], x[-1], 0, soln.shape[0]], interpolation="none")
 plt.colorbar()
 plt.show()
 plt.savefig("example_01b.png")
