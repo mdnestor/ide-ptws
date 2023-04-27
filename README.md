@@ -1,14 +1,16 @@
 This is a solver of integrodifference equations in 1-dimension written in Python 3 used in this paper: [arXiv:2202.00234](https://arxiv.org/abs/2202.00234).
 
-The main function is given in `ide.py` and there are examples of its usage in `/examples/`.
+The main function is given in [ide.py](ide.py) and there are examples of its usage in [/examples/](/examples/).
 
 ## Background
 
-The integrodifference equation (for a definition see [1]) is given by
+The integrodifference equation (for a definition see [1] or [Wikipedia](https://en.wikipedia.org/wiki/Integrodifference_equation)) can be written as
 
-$$ u_{t+1} = \int_{-\infty}^{\infty} k(x-y) f(u_t(y)) dy $$
+$$ u_{t+1}(x) = \int_{-\infty}^{\infty} k(x-y) f(u_t(y)) dy $$
 
 where each $u_t:\mathbb{R} \to \mathbb{R}$, $k$ is a convolution kernel, and $f$ is some function.
+
+[1]: Lutscher (2019).  Integrodifference Equations in Spatial Ecology. DOI: [10.1007/978-3-030-29294-2](https://doi.org/10.1007/978-3-030-29294-2)
 ## Usage
 
 The inputs to the solver are
