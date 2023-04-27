@@ -85,7 +85,7 @@ plt.legend()
 plt.savefig("examples/example_04.png")
 ```
 
-![](/examples/examples_04b.png)
+![](/examples/examples_04.png)
 
 
 We can take the final estimate to be the last value of `c`:
