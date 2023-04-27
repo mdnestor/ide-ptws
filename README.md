@@ -53,3 +53,44 @@ plt.savefig("examples/example_01b.png")
 ![](/examples/example_01b.png)
 
 *Note: t goes from top to bottom (the index is reversed).
+
+## Numerically estimating the traveling wave speed
+
+Let's increase the domain size to (-128, 128) and the number of steps to 100.
+The steady states of $f$ are $y=0$ and $y=(r-1)/r$, where $r=2$ (recycling use of $r$ from the definition of the Gaussian kernel).
+So we compute the mean of u0, divide by $(r-1)/r$, and treat this as the position of the wavefront as a proportion of the segment from the left and right endpoints of x.
+
+```python3
+x = np.linspace(-128, 128, 2**10)
+dx = (x[-1] - x[0]) / len(x)
+
+r = 4
+K = stats.norm.pdf(np.arange(-r, r+dx, dx))
+K /= np.sum(K)
+
+u0 = 0.5 * np.heaviside(-x, 1.0)
+f = lambda y: 2.0 * y * (1.0 - y)
+
+soln = simulate_integrodifference(x, u0, K, f, 100)
+
+w = np.mean(soln, axis=1) / 0.5* (x[-1] - x[0]) + x[0]
+c = np.gradient(w)
+
+c_est = c[-1]
+
+plt.plot(c, color="red")
+plt.xlabel("time step")
+plt.ylabel("estimated wavespeed")
+plt.legend()
+plt.savefig("examples/example_04.png")
+```
+
+![](/examples_04b.png)
+
+
+We can take the final estimate to be the last value of `c`:
+
+```python3
+>>> print(c_est)
+1.164225807614116
+```
