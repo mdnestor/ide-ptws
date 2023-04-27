@@ -1,6 +1,6 @@
 This is a solver of integrodifference equations in 1-dimension written in Python 3 used in this paper: [arXiv:2202.00234](https://arxiv.org/abs/2202.00234).
 
-The main function is given in [ide.py](ide.py) and there are examples of its usage in [/examples/](/examples/).
+The main function is given in [ide.py](ide.py) and there are examples of its usage in [/examples/](/examples/). Example 01 is a well-known model while examples 02 and 03 use the model from the paper.
 
 ## Background
 
@@ -21,7 +21,7 @@ The inputs to the solver are
 - the number of steps `n` to simulate
 The result is an array of shape (n,k) where k is the length of x.
 
-Here is an example usage, simulating with $f(x) = 2x(1-x)$, and $k(x)=$ the zero centered unit variance Gaussian in 1d from scipy.stats:
+Below is an example of the solver using $f(x)=2x(1-x)$ and $k$ is a N(0,1) Gaussian which we just import from scipy.stats:
 
 ```python3
 import numpy as np
@@ -51,3 +51,5 @@ plt.savefig("examples/example_01b.png")
 ```
 
 ![](/examples/example_01b.png)
+
+*Note: t goes from top to bottom (the index is reversed).
