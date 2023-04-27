@@ -43,7 +43,7 @@ The result is a 2d array which we can visualize as a heatmap:
 
 ```python3
 import matplotlib.pyplot as plt
-plt.imshow(soln, aspect="auto", extent=[x[0], x[-1], 0, soln.shape[0]])
+plt.imshow(soln, aspect="auto", extent=[x[0], x[-1], 0, soln.shape[0]], interpolation="none")
 plt.colorbar()
 plt.savefig("examples/example_01b.png")
 ```
